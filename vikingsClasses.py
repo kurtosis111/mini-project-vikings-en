@@ -73,8 +73,8 @@ class War():
     
     def vikingAttack(self):
         # your code here
-        chosen_viking_idx = random.sample(range(len(self.vikingArmy)), 1)[0]
-        chosen_saxon_idx = random.sample(range(len(self.saxonArmy)), 1)[0]
+        chosen_viking_idx = random.sample(range(len(self.vikingArmy)), 1)[0] if len(self.vikingArmy) > 0 else 0
+        chosen_saxon_idx = random.sample(range(len(self.saxonArmy)), 1)[0] if len(self.saxonArmy) > 0 else 0
         received_damage = self.saxonArmy[chosen_saxon_idx].receiveDamage(self.vikingArmy[chosen_viking_idx].strength)
         if received_damage == f"A Saxon has died in combat":
             del self.saxonArmy[chosen_saxon_idx]
@@ -82,9 +82,9 @@ class War():
     
     def saxonAttack(self):
         # your code here
-        chosen_viking_idx = random.sample(range(len(self.vikingArmy)), 1)[0]
+        chosen_viking_idx = random.sample(range(len(self.vikingArmy)), 1)[0] if len(self.vikingArmy) > 0 else 0
         chosen_viking = self.vikingArmy[chosen_viking_idx]
-        chosen_saxon_idx = random.sample(range(len(self.saxonArmy)), 1)[0]
+        chosen_saxon_idx = random.sample(range(len(self.saxonArmy)), 1)[0] if len(self.saxonArmy) > 0 else 0
         received_damage = chosen_viking.receiveDamage(self.saxonArmy[chosen_saxon_idx].strength)
         if received_damage == f"{chosen_viking.name} has died in act of combat":
             del self.vikingArmy[chosen_viking_idx]
@@ -96,7 +96,7 @@ class War():
             return f"Vikings have won the war of the century!"
         elif len(self.vikingArmy) == 0:
             return f"Saxons have fought for their lives and survive another day..."
-        elif (len(self.saxonArmy)==1) and (len(self.vikingArmy)==1):
+        else:
             return f"Vikings and Saxons are still in the thick of battle."
     pass
 
